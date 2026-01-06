@@ -57,6 +57,7 @@ return {
       i = {
         ["JK"] = { "<Esc>", noremap = true, silent = true },
       },
+
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
@@ -64,6 +65,7 @@ return {
         -- navigate buffer tabs
         ["L"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["H"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+
         -- mappings seen under group name "Buffer"
         ["<Leader>bd"] = {
           function()

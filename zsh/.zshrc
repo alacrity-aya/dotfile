@@ -110,10 +110,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias zj="zellij"
+alias iwyu="include-what-you-use"
+alias bear="env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY bear"
+alias kind="HTTP_PROXY=http://172.18.0.1:7897 HTTPS_PROXY=http://172.18.0.1:7897 kind"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-source /opt/clash/script/common.sh && source /opt/clash/script/clashctl.sh && watch_proxy
 export CC=clang
 export CXX=clang++
 
@@ -123,7 +125,47 @@ export LANG=en_US.UTF-8
 # >>> xmake >>>
 test -f "/home/alacrity/.xmake/profile" && source "/home/alacrity/.xmake/profile"
 # <<< xmake <<<
-alias bear="env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY bear"
 
 export EDITOR="nvim"
 export VISUAL="nvim"
+export GEMINI_API_KEY=
+export OPENAI_API_KEY=
+export VCPKG_ROOT="$HOME/work/vcpkg"
+export PATH="$VCPKG_ROOT:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+
+
+# vim mode
+bindkey -v
+
+function zle-keymap-select {
+	if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+		echo -ne '\e[1 q'
+	elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+		echo -ne '\e[5 q'
+  fi
+}
+zle -N zle-keymap-select
+
+# Use beam shape cursor on startup.
+echo -ne '\e[5 q'
+
+# Use beam shape cursor for each new prompt.
+preexec() {
+	echo -ne '\e[5 q'
+}
+
+_fix_cursor() {
+	echo -ne '\e[5 q'
+}
+precmd_functions+=(_fix_cursor)
+
+bindkey -M viins 'JK' vi-cmd-mode
+
+# 0.15s
+KEYTIMEOUT=15
+
