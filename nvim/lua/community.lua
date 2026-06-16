@@ -29,8 +29,6 @@ return {
   { import = "astrocommunity.utility.noice-nvim" },
   -- markdown
   { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
-  -- ai
-  { import = "astrocommunity.completion.avante-nvim" },
   -- vscode
   { import = "astrocommunity.recipes.vscode" },
 }
