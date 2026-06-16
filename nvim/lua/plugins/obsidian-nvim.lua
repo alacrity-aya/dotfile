@@ -8,7 +8,7 @@ return {
     legacy_commands = false,
     workspaces = {
       {
-        path = "~/Documents/Obsidian Vault",
+        path = "~/Documents/obsidian-vault",
       },
     },
     picker = {
