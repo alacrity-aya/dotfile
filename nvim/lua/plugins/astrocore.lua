@@ -1,4 +1,3 @@
-
 -- AstroCore provides a central place to modify mappings, vim options, autocommands, and more!
 -- Configuration documentation can be found with `:h astrocore`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
@@ -57,7 +56,6 @@ return {
       i = {
         ["JK"] = { "<Esc>", noremap = true, silent = true },
       },
-
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map

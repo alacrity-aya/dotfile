@@ -8,9 +8,17 @@ return {
     legacy_commands = false,
     workspaces = {
       {
-        path = "~/Documents/obsidian-vault",
+        path = "~/Documents/obsidian-vault/",
       },
     },
+
+    note_id_func = function(title)
+      if title ~= nil then
+        return title
+      else
+        return tostring(os.date "%Y%m%d%H%M%S")
+      end
+    end,
     picker = {
       name = "telescope.nvim",
     },
@@ -22,6 +30,11 @@ return {
     },
     attachments = {
       folder = "attachment",
+    },
+    templates = {
+      folder = "template",
+      date_format = "%Y-%m-%d-%a",
+      time_format = "%H:%M",
     },
   },
   dependencies = {

@@ -6,11 +6,12 @@ return {
       obsidian_disable_render_markdown = {
         {
           event = { "BufReadPre", "BufNewFile" },
-          pattern = vim.fn.expand "~/Documents/Obsidian Vault" .. "/*.md",
+          pattern = "*.md",
           callback = function(args)
-            vim.b[args.buf].render_markdown_enabled = false
+            local filepath = vim.api.nvim_buf_get_name(args.buf)
+            local vault_path = vim.fn.expand "~/Documents/obsidian-vault"
 
-            pcall(function() require("render-markdown").disable() end)
+            if filepath:find(vault_path, 1, true) then vim.b[args.buf].render_markdown_enabled = false end
           end,
         },
       },
